@@ -1,0 +1,131 @@
+{{ define "main" -}}
+ <!-- <div class="container max-height" {{ with .Params.heroimage }}
+    style="background: url({{ . }}) ; background-size:cover;" {{ end }}>
+ <div class="hero-body">
+    <div class="container max-800px">
+        <h1 class="title is-1 has-background-primary narrow-background">
+            {{ .Title }}
+        </h1>
+        {{ with .Params.herotext }}
+        <h2 class="title subtitle is-4 has-background-primary narrow-background">
+            {{ . }}
+        </h2>
+        {{ end }}
+    </div>
+</div>
+<div class="section">
+    <div class="container max-1000px">
+        <div class="content">
+            {{ .Content }}
+        </div>
+    </div>
+</div>
+
+</div> -->
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+<style>
+.frame {
+    width:100%;
+    height:100%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-image: url(/images/cover.svg)  
+}
+.frame iframe {
+  position: relative;
+  top: 150px;
+  left: 200px;
+  width: 250px;
+  }
+#head {
+  display: flex;
+  //width: 100px;
+  //margin: 50px 0px 0px 15px;
+}
+.headclass {
+  
+  width: 300px;
+  height: 100px;
+  margin: 0 5px ;
+}
+#wrapper{
+    display:flex;
+    flex-direction: column;
+}
+</style>
+	
+	</head>
+<body>
+
+<div id="head" style="margin-top:20px;margin-left:75px">
+<div class="headclass">
+<img class="img-responsive"  src="/images/kubetube-logo.svg" /></div>
+	<div class="headclass" style="padding-top:30px;width:80px"><a  style="color:#444141;font-weight:bold" href=" https://www.youtube.com/c/Replicatedhq" >
+  all videos
+</a></div><div  style="padding-top:30px;width:100px">
+	<a data-toggle="modal"  href="#exampleModal" style="color:#444141;font-weight:bold">
+  all projects
+</a></div><div style="padding-top:30px;width:80px;padding-left:20px">
+<a  href="https://www.twitch.tv/kubetubetv" >
+<img style="height:30px;width:30px"   src="/images/twitch.svg" /> 
+</a></div>
+<div style="padding-top:30px;width:80px">
+<a  href="https://twitter.com/kubetube_tv" >
+<img  style="height:30px;width:30px"   src="/images/twitter.svg" /> 
+</a></div>
+</div>
+
+<div>
+    <div style="padding-left:75px;margin-top:-50px;height:500px" id="head">
+             <h2 style="font-weight:bold;color:#444141;padding-top:75px">Program <br> Schedule:</h2>
+  <!--  <div style="width:100%;height:100%">
+<img style="width:75%;height:75%;padding-bottom:10px;" align="right" src="/images/cover.svg"  />
+<div class="frame"><iframe width="250" height="250" src="https://www.youtube.com/embed/JwkJUoax8_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div> -->
+
+<div class="frame"><iframe width="100" height="200" title="YouTube video player" src="https://www.youtube.com/embed/JwkJUoax8_Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+
+</div>
+<div>
+
+<p style="color:#4DB9C0;padding-left:100px" >FULL CALENDAR
+<a  href="https://calendar.google.com/calendar/embed?src=alyssa%40inxys.com&ctz=Asia%2FKolkata">
+<img  style="height:30px;width:30px"   src="/images/arrow.svg" /> 
+</a>
+</p>
+</div>
+
+</div>
+<div align="center" style="background-color:#444141;height:100px;padding-top:30px">
+{{partial "footer" .}}
+</div>
+<div class="modal fade" id="exampleModal">
+  <div class="modal-dialog" role="document" style="width:100%">
+    <div class="modal-content">
+	 <div class="modal-header">
+        <div id="wrapper"><div><h2 style="padding-left:100px">...Love KubeTube?</h2></div>
+		<div><h5 align="center" style="color:#4DB9C0;font-size:13px;padding-left:100px">Then you'll love our other projects!</h5></div></div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-body" id="head">
+      <img style="width:50%;height:50%"  src="/images/enterprise-ready.png" >
+	  <img style="width:50%;height:50%"  src="/images/kubelist.png" /></div>
+	  <div><img style="width:95%;height:100%;padding-left:20px;padding-bottom:20px"  src="/images/open-source-projs.png"/></div>
+     </div>
+    </div>
+  </div>
+
+</body>
+<!-- <div class="featured-image" style="background-image: url('{{ .Params.featured_image }}')"></div> -->
+</html>
+	
+  
+{{- end }}
+
+
