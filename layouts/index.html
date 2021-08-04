@@ -1,46 +1,140 @@
-{{ define "main" -}}
- <!-- <div class="container max-height" {{ with .Params.heroimage }}
-    style="background: url({{ . }}) ; background-size:cover;" {{ end }}>
- <div class="hero-body">
-    <div class="container max-800px">
-        <h1 class="title is-1 has-background-primary narrow-background">
-            {{ .Title }}
-        </h1>
-        {{ with .Params.herotext }}
-        <h2 class="title subtitle is-4 has-background-primary narrow-background">
-            {{ . }}
-        </h2>
-        {{ end }}
-    </div>
-</div>
-<div class="section">
-    <div class="container max-1000px">
-        <div class="content">
-            {{ .Content }}
-        </div>
-    </div>
-</div>
-
-</div> -->
 <html>
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+ 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500;600&display=swap" rel="stylesheet">
+ 
+</head>
+<script>
+$( document ).ready(function() {
+
+    $.ajax({
+
+        "url": "https://www.googleapis.com/calendar/v3/calendars/e1hcqcvs506cmvkfruo1ovq6fc@group.calendar.google.com/events",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer ya29.a0ARrdaM9-4Z8xW_P8J69pk4mM9MTeBknBSC01FhGEjooTeCIlARcLJ9x08J33oslpzCX4KVf9qCSwUAE-nebEP0_ZWWYHbaH928wvt5YtgYGUi3sd_c3E3owSNiDUPSfMXHKNkhBvVunJHIk-vfSyAmUM2JMd0w"},
+        success: function(response){
+		alert(response.kind);
+              
+        },
+        error: function(){
+                
+			gettoken()
+			//console.log(token);
+        }
+});
+});
+
+
+
+function gettoken()
+{
+//alert('hi')
+
+$.ajax({
+        "url": "https://oauth2.googleapis.com/token",
+  "method": "POST","async": "false",
+  "timeout": 0,
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded"
+  },
+  "data": {
+    "client_id": "1006980365852-uri1sfi3vumq4i3asmtqqqm6culi36u6.apps.googleusercontent.com",
+    "client_secret": "-cDBPSluPD6ffimuTv4ZunIZ",
+    "refresh_token": "1//0gtWdZhDvH3txCgYIARAAGBASNwF-L9IrataWqvj7QylaRGC_-ceL2IMZlrw0nXpHXx5pVf4hkMnnT7g-c_9lX6IvinQyYb_rFKs",
+    "grant_type": "refresh_token"
+  },
+  success: function(response){
+		Eventloop( response );
+            return response;
+               
+        },
+        error: function(){
+                
+			
+        }
+        
+});
+}
+
+function Eventloop( data ) {
+var list="";
+   	//alert(data.access_token);
+	$.ajax({
+        "url": "https://www.googleapis.com/calendar/v3/calendars/e1hcqcvs506cmvkfruo1ovq6fc@group.calendar.google.com/events",
+  "method": "GET",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Bearer "+ data.access_token},
+        success: function(response){
+		//alert(response.kind);
+		
+		console.log(response.items);
+		$.each(response.items,function(key, value) {
+          list=list+"<li><b>"+value.summary+"</b></br><b>"+value.start.dateTime+"</b></br><b>"+value.end.dateTime+"</b> <h6>"+  value.location+  "</h6></li>";
+          
+});
+$('#cal').append(list);
+
+        },
+        error: function(){
+                       }
+});
+
+}
+</script>
 <style>
-.frame {
-    width:100%;
-    height:100%;
+	
+
+
+*{
+  padding: 0;
+  margin: 0;
+  text-decoration: none ;
+}
+
+.banner-info h2 {
+    font-weight: 500;
+    color: #444141;
+    padding-top: 40px;
+        font-size: 45px;
+ padding-bottom: 30px;
+}
+
+ 
+.frame iframe {
+    position: relative;
+    top: 170px;
+    width: 481px;
+    height: 225px;
+    left: -132px;
+    border: 3px solid;
+    border: 10px solid #2b2b2b;
+    border-radius: 5px;
+}
+
+.banner-block::after {
+    width: 621px;
+    height: 692px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-image: url(/images/cover.svg)  
+    background-image: url(images/cover.svg);
+    position: absolute;
+    content: '';
+    top: -50px;
+    right: 0;
+    bottom: 0;
+    margin: auto;z-index: -1;
 }
-.frame iframe {
-  position: relative;
-  top: 150px;
-  left: 200px;
-  width: 250px;
-  }
+.banner-block {
+    position: relative;
+}
+ 
 #head {
   display: flex;
   //width: 100px;
@@ -48,61 +142,267 @@
 }
 .headclass {
   
-  width: 300px;
-  height: 100px;
+   
+  
   margin: 0 5px ;
 }
 #wrapper{
     display:flex;
     flex-direction: column;
 }
+.banner-info {
+    margin-left: 70px;
+}
+ul.calender-list li {
+    display: block;
+    background: #2b2b2b;
+    padding: 10px 25px;
+    border-radius: 5px;
+    color: #fff;
+    margin: 0px 0 20px 0;
+    width: 65%;
+}
+ul.calender-list li h6 {
+    font-weight: 400;
+    padding-top: 10px;
+}ul.calender-list li:nth-child(even) {
+    margin-left: 20px;    background: #4DB9C0;
+} 
+.calender-list h5 {
+    text-transform: uppercase;
+    color: #4DB9C0;
+    font-size: 18px;
+    text-align: center;
+     
+}.banner-block {
+    padding: 10px 0 60px 0;
+}.cpyrgt h5 {
+    text-align: center;
+    color: #fff;
+}
+
+  
+.pl {
+	padding: 0 10px;
+	 
+}
+.head-logo {
+    display: inline-block;
+}
+.top-links li {
+    display: inline-block;
+}
+
+.top-links {
+    padding: 7px 0 0 15px;
+}
+@media (max-width: 1199px){
+
+
+ul.calender-list li {
+     
+    width: 80%;
+}
+
+
+.banner-info h2 {
+     
+    font-size: 40px;
+ 
+}
+
+.frame iframe {
+    top: 170px;
+    width: 410px;
+    height: 212px;
+    left: -73px;
+}
+.banner-block::after {
+    width: 497px;
+    height: 692px;
+    
+}
+}
+
+@media (max-width: 991px){
+
+.banner-info h2 br {
+    display: none;
+}
+ .frame iframe {
+    width: 440px;
+    height: 300px;
+    left: 0;
+}
+    .banner-block::after {
+    content: inherit;
+    display: none;
+}
+
+ .banner-info {
+    margin-left: 0;
+}
+.banner-info h2 {
+ 
+    text-align: center;
+}
+ul.calender-list li {
+    width: 100%;
+}
+ul.calender-list li:nth-child(even) {
+    margin-left: 0;
+ 
+}.frame {
+    text-align: center;
+}.frame iframe {
+    
+    top: inherit;
+ 
+}
+
+ .banner-info h2 {
+    
+    padding-top: 20px;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+ 
+}
+
+@media (max-width: 767px){
+#head {
+	margin: 0 !important;
+}
+
+
+	}
+@media (max-width: 650px){
+    .pl {
+    padding: 0 0;
+}
+.frame iframe {
+    width: 100%;
+    height: 100%;
+ 
+}
+
+.head-logo {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0px 0 0;
+}
+#head {
+    display: block;
+ 
+}
+.top-links {
+    padding: 0;
+    text-align: center;
+}
+
+}
+
 </style>
-	
-	</head>
+
 <body>
 
+<div class="container-fluid">
+
+
 <div id="head" style="margin-top:20px;margin-left:75px">
-<div class="headclass">
-<img class="img-responsive"  src="/images/kubetube-logo.svg" /></div>
-	<div class="headclass" style="padding-top:30px;width:80px"><a  style="color:#444141;font-weight:bold" href=" https://www.youtube.com/c/Replicatedhq" >
+<div class="head-logo">
+
+<img class="img-responsive"  src="images/kubetube-logo.svg" /></div>
+
+
+<ul class="top-links">
+
+ 
+
+<li>
+ <div class="headclass" style="padding-top:30px; "><a class="pl" style="color:#444141;font-weight:bold" href=" https://www.youtube.com/c/Replicatedhq" >
   all videos
-</a></div><div  style="padding-top:30px;width:100px">
-	<a data-toggle="modal"  href="#exampleModal" style="color:#444141;font-weight:bold">
+</a></div>
+    </li>
+
+<li>
+<div  style="padding-top:30px; ">
+    <a  class="pl" data-toggle="modal"  href="#exampleModal" style="color:#444141;font-weight:bold">
   all projects
-</a></div><div style="padding-top:30px;width:80px;padding-left:20px">
-<a  href="https://www.twitch.tv/kubetubetv" >
-<img style="height:30px;width:30px"   src="/images/twitch.svg" /> 
 </a></div>
-<div style="padding-top:30px;width:80px">
+</li>
+
+<li>
+    <div style="padding-top:30px; ;padding-left:20px">
+<a   href="https://www.twitch.tv/kubetubetv" >
+<img style="height:30px;width:30px"   src="images/twitch.svg" /> 
+</a></div>
+
+    </li>
+<li>
+<div style="padding-top:30px; padding-left:20px">
 <a  href="https://twitter.com/kubetube_tv" >
-<img  style="height:30px;width:30px"   src="/images/twitter.svg" /> 
+<img  style="height:30px;width:30px"   src="images/twitter.svg" /> 
 </a></div>
-</div>
+</li>
 
-<div>
-    <div style="padding-left:75px;margin-top:-50px;height:500px" id="head">
-             <h2 style="font-weight:bold;color:#444141;padding-top:75px">Program <br> Schedule:</h2>
-  <!--  <div style="width:100%;height:100%">
-<img style="width:75%;height:75%;padding-bottom:10px;" align="right" src="/images/cover.svg"  />
-<div class="frame"><iframe width="250" height="250" src="https://www.youtube.com/embed/JwkJUoax8_Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
-</div> -->
+    </ul>
+ 
 
-<div class="frame"><iframe width="100" height="200" title="YouTube video player" src="https://www.youtube.com/embed/JwkJUoax8_Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 </div>
-<div>
+</div>
 
-<p style="color:#4DB9C0;padding-left:100px" >FULL CALENDAR
-<a  href="https://calendar.google.com/calendar/embed?src=alyssa%40inxys.com&ctz=Asia%2FKolkata">
-<img  style="height:30px;width:30px"   src="/images/arrow.svg" /> 
+<div class="banner-block">
+<div class="container-fluid">
+ <div class="row">
+<div class="col-lg-6">
+
+<div class="banner-info">
+
+<h2>Program <br> Schedule:</h2>
+
+<ul id="cal"class="calender-list">
+
+
+
+
+ 
+</ul>
+<h5>Full Calendar &nbsp;
+<a href="https://calendar.google.com/calendar/embed?src=alyssa%40inxys.com&amp;ctz=Asia%2FKolkata">
+<img style="height: 45px;width: 55px;" src="./images/arrow.svg">
 </a>
-</p>
+ </h5>
+
+
+</div>
+
+
+
+</div>
+
+<div class="col-lg-6">
+<div class="banner-vdo">
+<div class="frame"><iframe width="100" height="200" title="YouTube video player" src="https://www.youtube.com/embed/JwkJUoax8_Y" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 </div>
 
 </div>
-<div align="center" style="background-color:#444141;height:100px;padding-top:30px">
-{{partial "footer" .}}
+
+ </div>
+
 </div>
+
+</div>
+
+
+
+ <div class=" cpyrgt" style="background-color:#444141;height:100px;padding-top:30px">
+ <h5> made with <img style="width: 26px;height: 26px;color: #fff;margin: 0 5px;fill: #fff;" src="images/like.svg">  by <img style="width: 115px;height: 50px;margin: 0 10px;" src="images/Replicated-Logo-Wheat.svg">  </h5>
+</div>
+
+
 <div class="modal fade" id="exampleModal">
   <div class="modal-dialog" role="document" style="width:100%">
     <div class="modal-content">
@@ -114,18 +414,14 @@
         </button>
       </div>
      <div class="modal-body" id="head">
-      <img style="width:50%;height:50%"  src="/images/enterprise-ready.png" >
-	  <img style="width:50%;height:50%"  src="/images/kubelist.png" /></div>
-	  <div><img style="width:95%;height:100%;padding-left:20px;padding-bottom:20px"  src="/images/open-source-projs.png"/></div>
+      <img style="width:50%;height:50%"  src="./images/enterprise-ready.png" >
+	  <img style="width:50%;height:50%"  src="./images/kubelist.png" /></div>
+	  <div><img style="width:95%;height:100%;padding-left:20px;padding-bottom:20px"  src="./images/open-source-projs.png"/></div>
      </div>
     </div>
   </div>
 
 </body>
-<!-- <div class="featured-image" style="background-image: url('{{ .Params.featured_image }}')"></div> -->
+ 
 </html>
 	
-  
-{{- end }}
-
-
