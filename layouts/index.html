@@ -90,8 +90,6 @@ $('#cal').append(list);
 </script>
 <style>
 	
-
-
 *{
   padding: 0;
   margin: 0;
@@ -109,15 +107,14 @@ $('#cal').append(list);
  
 .frame iframe {
     position: relative;
-    top: 170px;
-    width: 481px;
-    height: 225px;
+    top: 115px;
+    width: 534px;
+    height: 311px;
     left: -132px;
     border: 3px solid;
-    border: 10px solid #2b2b2b;
+    border: 8px solid #2b2b2b;
     border-radius: 5px;
 }
-
 .banner-block::after {
     width: 621px;
     height: 692px;
@@ -126,10 +123,11 @@ $('#cal').append(list);
     background-image: url(images/cover.svg);
     position: absolute;
     content: '';
-    top: -50px;
+    top: -150px;
     right: 0;
     bottom: 0;
-    margin: auto;z-index: -1;
+    margin: auto;
+    z-index: -1;
 }
 .banner-block {
     position: relative;
@@ -174,9 +172,13 @@ ul.calender-list li h6 {
     font-size: 18px;
     text-align: center;
      
-}.banner-block {
-    padding: 10px 0 60px 0;
-}.cpyrgt h5 {
+}
+
+.banner-block {
+    padding: 10px 0 170px 0;
+}
+
+.cpyrgt h5 {
     text-align: center;
     color: #fff;
 }
@@ -196,6 +198,20 @@ ul.calender-list li h6 {
 .top-links {
     padding: 7px 0 0 15px;
 }
+
+
+.cpyrgt {
+    
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: red;
+    color: white;
+    text-align: center;
+ 
+}
+
 @media (max-width: 1199px){
 
 
@@ -212,9 +228,9 @@ ul.calender-list li {
 }
 
 .frame iframe {
-    top: 170px;
-    width: 410px;
-    height: 212px;
+    top: 138px;
+    width: 483px;
+    height: 265px;
     left: -73px;
 }
 .banner-block::after {
@@ -222,6 +238,7 @@ ul.calender-list li {
     height: 692px;
     
 }
+
 }
 
 @media (max-width: 991px){
@@ -229,8 +246,8 @@ ul.calender-list li {
 .banner-info h2 br {
     display: none;
 }
- .frame iframe {
-    width: 440px;
+.frame iframe {
+    width: 100%;
     height: 300px;
     left: 0;
 }
@@ -282,7 +299,7 @@ ul.calender-list li:nth-child(even) {
 }
 .frame iframe {
     width: 100%;
-    height: 100%;
+     
  
 }
 
