@@ -61,7 +61,6 @@ $.ajax({
         
 });
 }
-
 function Eventloop( data ) {
 var list="";
    	//alert(data.access_token);
@@ -76,15 +75,29 @@ var list="";
 		
 		console.log(response.items);
 		$.each(response.items,function(key, value) {
-          list=list+"<li><b>"+value.summary+"</b></br><b>"+value.start.dateTime+"</b></br><b>"+value.end.dateTime+"</b> <h6>"+  value.location+  "</h6></li>";
+		var start=new Date(value.start.dateTime);
+		var end =new Date(value.end.dateTime);
+		var re=end.toLocaleDateString("en-us", {weekday: 'short', 
+    day: 'numeric', 
+    year: 'numeric', 
+    month: 'long', 
+    hour: 'numeric', 
+    minute: 'numeric', 
+    second: 'numeric', 
+	});
+		
+          list=list+"<li><b>"+value.summary+"</b></br><b>"+start+"</b></br><b>"+end+"</b> <h6>"+  value.location+  "</h6></li>";
           
 });
 $('#cal').append(list);
 
         },
         error: function(){
+		
                        }
-});
+}); 
+
+
 
 }
 </script>
