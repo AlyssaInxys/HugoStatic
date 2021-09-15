@@ -1,9 +1,45 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-    {{ $title := print .Site.Title " | " .Title }}
-    {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
-    <title>{{ $title }}</title>
-</head>
+<div id="head" style="margin-top:20px;margin-left:75px">
+<div class="head-logo">
+
+<img src="{{ with .Params.logo }}{{ . }}{{ end }}" />
+
+</div>
+
+
+<ul class="top-links">
+
+ 
+
+<li>
+ <div class="headclass" style="padding-top:30px; "><a class="pl" style="color:#444141;font-weight:bold" 
+ href="{{ $.Params.videos }}" target="_blank" >
+  all videos
+</a></div>
+    </li>
+
+<li>
+<div  style="padding-top:30px; ">
+    <a  class="pl" data-toggle="modal"  href="#exampleModal" style="color:#444141;font-weight:bold">
+  all projects
+</a></div>
+</li>
+
+<li>
+    <div style="padding-top:30px; ;padding-left:20px">
+<a   href="{{ $.Params.twitch }}" target="_blank" >
+<img style="height:30px;width:30px"   src="{{ with .Params.twitchimg }}{{ . }}{{ end }}" /> 
+</a></div>
+
+    </li>
+<li>
+<div style="padding-top:30px; padding-left:20px">
+<a   href="{{ $.Params.twitter }}" target="_blank" >
+<img  style="height:30px;width:30px"   src="{{ with .Params.twitterimg }}{{ . }}{{ end }}" /> 
+</a></div>
+</li>
+
+    </ul>
+ 
+
+
+</div>
